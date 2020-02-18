@@ -6,6 +6,25 @@ from django.http import HttpResponseRedirect
 from .forms import ImageForm, PostForm
 from .models import Images,Post
 
+from django.views.generic import ListView, DetailView
+
+#from .models import Article
+
+class ArticleListView(ListView):
+    model = Post
+    template_name = 'article_list.html'
+
+
+class ArticleDetailView(DetailView):
+    model = Post
+    template_name = 'article_detail.html'
+
+
+
+
+
+
+
 #@login_required
 def post(request):
     ImageFormSet = modelformset_factory(Images,form=ImageForm, extra=3)
@@ -45,5 +64,5 @@ def post(request):
 
 def mypage(request):
     myposts= Post.objects.all()
-    images= Images.objects.all()
-    return render(request,'base.html',{'myposts':myposts,'images':images})
+    #images= Images.objects.all()
+    return render(request,'base.html',{'myposts':myposts,})
